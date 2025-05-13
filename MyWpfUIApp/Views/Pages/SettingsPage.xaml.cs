@@ -10,7 +10,7 @@ namespace MyWpfUIApp.Views.Pages
         public SettingsPage(SettingsViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
 
             InitializeComponent();
         }

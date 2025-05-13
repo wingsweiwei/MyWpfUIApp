@@ -11,6 +11,8 @@ namespace MyWpfUIApp.ViewModels.Pages
     public partial class SettingsViewModel(IStringLocalizer<Translations> localizer) : ObservableRecipient, IRecipient<ValueChangedMessage<CultureInfo>>, INavigationAware
     {
         [ObservableProperty]
+        private string[] _languages = ["en-US", "zh-CN"];
+        [ObservableProperty]
         private string _appVersion = string.Empty;
         [ObservableProperty]
         private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;

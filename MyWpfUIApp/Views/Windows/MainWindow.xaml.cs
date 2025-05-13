@@ -8,8 +8,6 @@ namespace MyWpfUIApp.Views.Windows
 {
     public partial class MainWindow : INavigationWindow
     {
-        public MainWindowViewModel ViewModel { get; }
-
         public MainWindow(
             MainWindowViewModel viewModel,
             INavigationViewPageProvider navigationViewPageProvider,
@@ -18,9 +16,7 @@ namespace MyWpfUIApp.Views.Windows
             IContentDialogService contentDialogService
         )
         {
-            ViewModel = viewModel;
             DataContext = viewModel;
-            viewModel.Window = this;
             SystemThemeWatcher.Watch(this);
 
             InitializeComponent();
@@ -31,24 +27,12 @@ namespace MyWpfUIApp.Views.Windows
             contentDialogService.SetDialogHost(RootContentDialog);
         }
 
-        #region INavigationWindow methods
-
         public INavigationView GetNavigation() => RootNavigation;
-
-        INavigationView INavigationWindow.GetNavigation()
-        {
-            throw new NotImplementedException();
-        }
         public bool Navigate(Type pageType) => RootNavigation.Navigate(pageType);
-
         public void SetPageService(INavigationViewPageProvider navigationViewPageProvider) => RootNavigation.SetPageProviderService(navigationViewPageProvider);
-
         public void ShowWindow() => Show();
-
         public void CloseWindow() => Close();
-
-        #endregion INavigationWindow methods
-
+        public void SetServiceProvider(IServiceProvider serviceProvider) => RootNavigation.SetServiceProvider(serviceProvider);
         /// <summary>
         /// Raises the closed event.
         /// </summary>
@@ -58,12 +42,6 @@ namespace MyWpfUIApp.Views.Windows
 
             // Make sure that closing this window will begin the process of closing the application.
             Application.Current.Shutdown();
-        }
-
-
-        public void SetServiceProvider(IServiceProvider serviceProvider)
-        {
-            throw new NotImplementedException();
         }
     }
 }
