@@ -40,7 +40,6 @@ public partial class App
             services.AddSingleton<ITaskBarService, TaskBarService>();
             services.AddSingleton<ISnackbarService, SnackbarService>();
             services.AddSingleton<IContentDialogService, ContentDialogService>();
-            // Service containing navigation, same as INavigationWindow... but without window
             services.AddSingleton<INavigationService, NavigationService>();
 
             // Main window with navigation
@@ -48,9 +47,9 @@ public partial class App
             services.AddSingleton<MainWindowViewModel>();
 
             services.AddTransientFromNamespace("MyWpfUIApp.Views.Pages", ServiceLifetime.Transient);
-            //services.AddTransientFromNamespace("MyWpfUIApp.Views.Windows", ServiceLifetime.Transient);
+            services.AddTransientFromNamespace("MyWpfUIApp.Views.Windows", ServiceLifetime.Transient);
             services.AddTransientFromNamespace("MyWpfUIApp.ViewModels.Pages", ServiceLifetime.Transient);
-            //services.AddTransientFromNamespace("MyWpfUIApp.ViewModels.Windows", ServiceLifetime.Transient);
+            services.AddTransientFromNamespace("MyWpfUIApp.ViewModels.Windows", ServiceLifetime.Transient);
 
             services.AddLocalization();
         }).Build();
