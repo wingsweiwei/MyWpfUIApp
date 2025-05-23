@@ -23,17 +23,20 @@ namespace MyWpfUIApp.ViewModels.Windows
         public void Receive(ValueChangedMessage<CultureInfo> message)
         {
             OnPropertyChanged(nameof(Localizer));
+            // Reset BreadcrumbBar items
             _navigationService.GoBack();
             _navigationService.Navigate(typeof(Views.Pages.SettingsPage));
         }
 
         [RelayCommand]
-        private void Test()
+        private async Task Test()
         {
-            var cultureInfo = CultureInfo.GetCultureInfo("en-US");
-            CultureInfo.CurrentCulture = cultureInfo;
-            CultureInfo.CurrentUICulture = cultureInfo;
-            OnPropertyChanged(nameof(Localizer));
+            var messageBox = new MessageBox()
+            {
+                Title = "Test Title",
+                Content = "Test Content",
+            };
+            await messageBox.ShowDialogAsync();
         }
         [RelayCommand]
         private static void Exit()

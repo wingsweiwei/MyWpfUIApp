@@ -46,10 +46,11 @@ public partial class App
             services.AddSingleton<INavigationWindow, MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
 
-            services.AddTransientFromNamespace("MyWpfUIApp.Views.Pages", ServiceLifetime.Transient);
-            services.AddTransientFromNamespace("MyWpfUIApp.Views.Windows", ServiceLifetime.Transient);
-            services.AddTransientFromNamespace("MyWpfUIApp.ViewModels.Pages", ServiceLifetime.Transient);
-            services.AddTransientFromNamespace("MyWpfUIApp.ViewModels.Windows", ServiceLifetime.Transient);
+            services.AddFromNamespace("MyWpfUIApp.Services", ServiceLifetime.Singleton);
+            services.AddFromNamespace("MyWpfUIApp.Views.Pages", ServiceLifetime.Transient);
+            services.AddFromNamespace("MyWpfUIApp.Views.Windows", ServiceLifetime.Transient);
+            services.AddFromNamespace("MyWpfUIApp.ViewModels.Pages", ServiceLifetime.Transient);
+            services.AddFromNamespace("MyWpfUIApp.ViewModels.Windows", ServiceLifetime.Transient);
 
             services.AddLocalization();
         }).Build();

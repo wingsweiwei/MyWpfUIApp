@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MyWpfUIApp.Services;
 using MyWpfUIApp.ViewModels.Windows;
 using MyWpfUIApp.Views.Windows;
 using System.Reflection;
@@ -7,9 +8,14 @@ namespace MyWpfUIApp.Helpers;
 
 internal static class DependencyInjectionExtensions
 {
-    private static readonly HashSet<Type> _excludedTypes = [typeof(MainWindow), typeof(MainWindowViewModel)];
+    private static readonly HashSet<Type> _excludedTypes =
+    [
+        typeof(ApplicationHostService),
+        typeof(MainWindow),
+        typeof(MainWindowViewModel)
+    ];
 
-    public static IServiceCollection AddTransientFromNamespace(this IServiceCollection services, string namespaceName, ServiceLifetime serviceLifetime)
+    public static IServiceCollection AddFromNamespace(this IServiceCollection services, string namespaceName, ServiceLifetime serviceLifetime)
     {
         var assembly = Assembly.GetEntryAssembly() ?? throw new InvalidOperationException("Entry assembly not found.");
         foreach (var type in assembly.GetTypes()
